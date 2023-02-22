@@ -1,0 +1,22 @@
+s (17 sloc)  383 Bytes
+
+  version: 2.1
+
+# Define a job to be invoked later in a workflow.
+  commands:
+    print_pipeline_id:
+      description: print the ID of CIRCLE_WORKFLOW
+      steps:
+        - run: echo ${CIRCLE_WORKFLOW_ID}
+
+  jobs: 
+    my_job:
+      docker: 
+        - image: circleci/node:13.8.0
+      steps:
+        - print_pipeline_id
+
+  workflows:
+    my_workflow:
+      jobs:
+        - my_job
